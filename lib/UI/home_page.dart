@@ -11,9 +11,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter PDF Viewer'),
+        title: const Text('PDF Reader'),
         centerTitle: true,
         leading: const Icon(Icons.sort_rounded),
         actions: [
@@ -29,16 +32,64 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: Container(
+              width: double.maxFinite,
               alignment: Alignment.center,
-              color: Colors.teal,
-              child: const Text('Window-1'),
+              child: Image.asset('images/bg.png',fit: BoxFit.cover,),
             ),
           ),
           Expanded(
+            flex: 3,
             child: Container(
-              alignment: Alignment.center,
-              color: Colors.pinkAccent,
-              child: const Text('Window-2'),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      alignment: Alignment.center,
+                      color: Colors.indigo,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Recent files',style: TextStyle(fontSize: 18),),
+                          const SizedBox(height: 12,),
+                          Container(
+                            height: size.height * 0.3,
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.white54,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: ListView.separated(
+                              shrinkWrap: true,
+                                itemBuilder: ((context,index) {
+                                  return ListTile(
+                                    leading: Image.asset('images/pdf.png', width: 40, height: 50,),
+                                    title: const Text('File Name',style: TextStyle(color: Colors.black87),),
+                                  );
+                                }),
+                                separatorBuilder: (context, index) => const Divider(color: Colors.white,),
+                                itemCount: 3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.amber,
+                      child: const Text('Window-2'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           )
         ],
