@@ -3,6 +3,7 @@
 A new Flutter project.
 
 ## Getting Started
+ <img src="https://github.com/F-Reza/Flutter_PDF_Viewer/blob/main/Screenshot.png" width="340">
 
 This project is a starting point for a Flutter application.
 
