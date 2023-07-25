@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pdf_viewer/UI/pdf_screen.dart';
 
 import 'UI/home_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.routeName,
       routes: {
         HomePage.routeName: (context) => const HomePage(),
+        PDFScreen.routeName: (context) => const PDFScreen(),
       },
     );
   }

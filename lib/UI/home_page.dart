@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pdf_viewer/UI/pdf_screen.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/';
@@ -23,7 +24,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.help),
             onPressed: () {
-              //
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const PDFScreen()),);
+              //Navigator.pushNamed(context, PDFScreen.routeName);
             },
           ),
         ],
