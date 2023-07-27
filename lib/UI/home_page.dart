@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdf_viewer/UI/pdf_screen.dart';
 
@@ -10,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  FilePickerResult? filePickerResult;
+
   @override
   Widget build(BuildContext context) {
 
@@ -24,7 +27,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.help),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const PDFScreen()),);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const PDFScreen(index: 0,)),);
               //Navigator.pushNamed(context, PDFScreen.routeName);
             },
           ),
@@ -104,14 +107,25 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 buttonWidget(
                                   color: Colors.white24,
-                                  onTap : () {},
+                                  onTap : () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const PDFScreen(index: 1,)),);
+                                  },
                                   path: 'images/open.png',
                                   title: 'Open URL',
                                 ),
                                 const SizedBox(width: 12,),
                                 buttonWidget(
                                   color: Colors.white54,
-                                  onTap : () {},
+                                  onTap : () async {
+                                    filePickerResult = await FilePicker.platform.pickFiles(
+                                      allowedExtensions: ['pdf'],
+                                      type: FileType.custom,
+                                    );
+                                    if (filePickerResult != null) {
+                                      var path = filePickerResult!.files.single.path;
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => PDFScreen(index: 2, path: path,)),);
+                                    }
+                                  },
                                   path: 'images/folder.png',
                                   title: 'Select File',
                                 ),
